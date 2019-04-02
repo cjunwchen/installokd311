@@ -87,6 +87,26 @@ It is important to prepare DNS before the installation. The domain used in this 
 	
 [5.5] Create ansible inventory file, here is the [inventory.ini](https://github.com/cjunwchen/installokd311/blob/master/inventory.ini) that used for this example.
 	
+[5.6] Install openshift via ansible
+
+	ansible-playbook -i ./inventory.ini $HOME/openshift-ansible/playbooks/prerequisites.yml
+	ansible-playbook -i ./inventory.ini $HOME/openshift-ansible/playbooks/deploy_cluster.yml
+
+[5.7] Enable oc bash completion 
+
+	sudo oc completion bash >>/etc/bash_completion.d/oc_completion
+
+[5.8] Add user to OpenShift user
+
+	sudo htpasswd -b /etc/origin/master/htpasswd jun [password]
+
+[5.9] Add user 'jun' as cluster admin
+
+	oc adm policy add-cluster-role-to-user cluster-admin jun
+
+
+
+
 
 
   
