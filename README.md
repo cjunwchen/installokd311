@@ -85,7 +85,7 @@ It is important to prepare DNS before the installation. The domain used in this 
 	
 	git clone -b release-3.11 https://github.com/openshift/openshift-ansible.git $HOME/openshift-ansible
 	
-[5.5] Create ansible inventory file, here is the [inventory.ini](#https://github.com/cjunwchen/installokd311/blob/master/inventory.ini) that used for this example.
+[5.5] Create ansible inventory file, here is the [inventory.ini](https://github.com/cjunwchen/installokd311/blob/master/inventory.ini) that used for this example.
 	
 
 
