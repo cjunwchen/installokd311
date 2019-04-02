@@ -17,7 +17,7 @@ It is important to prepare DNS before the installation. The domain used in this 
 
 # 3. Prepare Centos on master and all other nodes
 
-## 3.1 Update Centos
+## 3.1 Install Centos and update Centos after installation
 
 	#sudo yum update -y
   
