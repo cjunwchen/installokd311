@@ -104,6 +104,16 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 5.9 Add user 'jun' as cluster admin
 
 	oc adm policy add-cluster-role-to-user cluster-admin jun
+	
+# 6. Deploy router to all node
+
+The installation only deploy one router in master, to depoly router in other node, so that external request can be handled by every node in OpenShift cluster. 
+
+
+	$ oc adm router router-node1 --replicas=1 --selector='kubernetes.io/hostname=okd-node1.f5se.io' --service-account=router
+		
+	$ oc adm router router-node2 --replicas=1 --selector='kubernetes.io/hostname=okd-node2.f5se.io' --service-account=router
+
 
 
 
