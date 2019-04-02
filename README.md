@@ -26,6 +26,22 @@ It is important to prepare DNS before the installation. The domain used in this 
 	#sudo yum install -y docker
 	#sudo systemctl start docker && sudo systemctl enable docker
 
+[6] Install git
+
+	#sudo yum install -y git
+
+[7] On All Nodes, Create a user for installation to be used in Ansible and also grant root privileges
+
+	[root@okd-master1~]# echo -e 'Defaults:jun !requiretty\njun ALL = (root) NOPASSWD:ALL' | tee /etc/sudoers.d/openshift 
+	[root@okd-master1~]# chmod 440 /etc/sudoers.d/openshift 
+
+	if Firewalld is running, allow SSH
+	[root@okd-master1 ~]# firewall-cmd --add-service=ssh --permanent 
+	[root@okd-master1 ~]# firewall-cmd --reload 
+
+
+
+
 
   
 
