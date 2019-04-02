@@ -13,6 +13,8 @@ It is important to prepare DNS before the installation. The domain used in this 
 
 ![](https://github.com/cjunwchen/installokd311/blob/master/images/dnsad.png)
 
+Take note, a wildcard DNS record would need for external to access apps, the DNS record should be point to IP address of node. 
+
 # 3. Prepare Centos on master and all other nodes
 
 3.1 Install Centos and update Centos after installation
