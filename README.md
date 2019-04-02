@@ -47,14 +47,14 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 	[jun@okd-master1 ~]$vi ~/.ssh/config
 	# create new ( define each node )
 	Host okd-master1
-   	  Hostname okd-master1.f5se.io
-  	  User jun
+	  Hostname okd-master1.f5se.io
+	  User jun
 	Host okd-node1
-    	  Hostname okd-node1.f5se.io
-    	  User jun
+	  Hostname okd-node1.f5se.io
+	  User jun
 	Host okd-node2
-     	  Hostname okd-node2.f5se.io
-    	  User jun
+	  Hostname okd-node2.f5se.io
+	  User jun
 	  
 	[jun@okd-master1 ~]$chmod 600 ~/.ssh/config
 	# transfer public-key to other nodes
