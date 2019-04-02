@@ -65,6 +65,7 @@ It is important to prepare DNS before the installation. The domain used in this 
 	[jun@okd-master1~]$ ssh-copy-id okd-node2.f5se.io 
 
 [5]	On Master Node, install openshift
+
 [5.1] Install Ansible
 
 	sudo yum install -y epel-release
