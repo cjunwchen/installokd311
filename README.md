@@ -1,4 +1,4 @@
-Install OKD might be challenge sometime if not prepare properly, the document provides detail steps for the installation. 
+Install OKD might be challenge sometime if not prepare properly, the document provides steps for the installation. 
 
 [1] Network Architecture
 
@@ -38,9 +38,55 @@ It is important to prepare DNS before the installation. The domain used in this 
 	if Firewalld is running, allow SSH
 	[root@okd-master1 ~]# firewall-cmd --add-service=ssh --permanent 
 	[root@okd-master1 ~]# firewall-cmd --reload 
+	
+[8] On Master Node, login with a user created above and set SSH keypair with no pass-phrase. This steps is important, otherwise, the ansible installation in later step would fail
 
+	[jun@okd-master1 ~]$ ssh-keygen -q -N "" 
+	Enter file in which to save the key (/home/origin/.ssh/id_rsa):
 
+	[jun@okd-master1 ~]$vi ~/.ssh/config
+	# create new ( define each node )
+	Host okd-master1
+   	  Hostname okd-master1.f5se.io
+  	  User jun
+	Host okd-node1
+    	  Hostname okd-node1.f5se.io
+    	  User jun
+	Host okd-node2
+     	  Hostname okd-node2.f5se.io
+    	  User jun
+	  
+	[jun@okd-master1 ~]$chmod 600 ~/.ssh/config
+	# transfer public-key to other nodes
+	[jun@okd-master1~]$ ssh-copy-id okd-master1.f5se.io 
+	[jun@okd-master1.f5se.io password: 
 
+	[jun@okd-master1~]$ ssh-copy-id okd-node1.f5se.io 
+	[jun@okd-master1~]$ ssh-copy-id okd-node2.f5se.io 
+
+[5]	On Master Node, install openshift
+
+	[5.1] Install Ansible
+
+	sudo yum install -y epel-release
+	sudo yum install -y ansible
+
+	[5.2] Disable epel-release
+	
+	sudo vi /etc/yum.repos.d/epel.repo
+	# Change the value enabled=1 to 0 (zero).
+
+	[5.3] Prepare auth
+	
+	sudo mkdir -p /etc/origin/master/
+	sudo touch /etc/origin/master/htpasswd
+
+	[5.4] Clone openshift-ansible git 
+	
+	git clone -b release-3.11 https://github.com/openshift/openshift-ansible.git $HOME/openshift-ansible
+	
+	[5.5] Create ansible inventory file
+	
 
 
   
