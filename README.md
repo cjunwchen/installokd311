@@ -19,11 +19,12 @@ It is important to prepare DNS before the installation. The domain used in this 
 
 [4] Update Centos
 
-  sudo yum update -y
+	#sudo yum update -y
   
 [5] Install docker, and start docker automatically
-	sudo yum install -y docker
-	sudo systemctl start docker && sudo systemctl enable docker
+
+	#sudo yum install -y docker
+	#sudo systemctl start docker && sudo systemctl enable docker
 
 
   
