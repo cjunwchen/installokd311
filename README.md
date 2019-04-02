@@ -1,6 +1,6 @@
 Install OKD might be challenge sometime if not prepare properly, the document provides steps for the installation. 
 
-[1] Network Architecture
+#H1 Network Architecture
 
   ![](https://github.com/cjunwchen/installokd311/blob/master/images/network_diagram.png)
   
