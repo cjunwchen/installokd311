@@ -1,6 +1,6 @@
 Install OKD might be challenge sometime if not prepare properly, the document provides steps for the installation. 
 
-# H1 1. Network Architecture
+# 1. Network Architecture
 
   ![](https://github.com/cjunwchen/installokd311/blob/master/images/network_diagram.png)
   
@@ -9,28 +9,28 @@ Install OKD might be challenge sometime if not prepare properly, the document pr
   * Compute node has up to 8G memory and up to 1 vCPU.
   * On all nodes, base OS is RHEL(CentOS) 7.4 or later (this example is based on CentOS 7.5).
 
-# H1 2. Prepare DNS
+# 2. Prepare DNS
 
 It is important to prepare DNS before the installation. The domain used in this example is f5se.io, which is a internal   domain. Here is how DNS record according to the network diagram above, the external DNS used in this installation is Microsoft AD server. 
 
 ![](https://github.com/cjunwchen/installokd311/blob/master/images/dnsad.png)
 
-[3] Install Centos
+# 3. Prepare Centos on master and all other nodes
 
-[4] Update Centos
+## 3.1 Update Centos
 
 	#sudo yum update -y
   
-[5] Install docker, and start docker automatically
+## 3.2 Install docker, and start docker automatically
 
 	#sudo yum install -y docker
 	#sudo systemctl start docker && sudo systemctl enable docker
 
-[6] Install git
+## 3.3 Install git
 
 	#sudo yum install -y git
 
-[7] On All Nodes, Create a user for installation to be used in Ansible and also grant root privileges
+## 3.4 On All Nodes, Create a user for installation to be used in Ansible and also grant root privileges
 
 	[root@okd-master1~]# echo -e 'Defaults:jun !requiretty\njun ALL = (root) NOPASSWD:ALL' | tee /etc/sudoers.d/openshift 
 	[root@okd-master1~]# chmod 440 /etc/sudoers.d/openshift 
@@ -39,7 +39,7 @@ It is important to prepare DNS before the installation. The domain used in this 
 	[root@okd-master1 ~]# firewall-cmd --add-service=ssh --permanent 
 	[root@okd-master1 ~]# firewall-cmd --reload 
 	
-[8] On Master Node, login with a user created above and set SSH keypair with no pass-phrase. This steps is important, otherwise, the ansible installation in later step would fail
+## 3.5 On Master Node, login with a user created above and set SSH keypair with no pass-phrase. This steps is important, otherwise, the ansible installation in later step would fail
 
 	[jun@okd-master1 ~]$ ssh-keygen -q -N "" 
 	Enter file in which to save the key (/home/origin/.ssh/id_rsa):
