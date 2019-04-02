@@ -65,27 +65,26 @@ It is important to prepare DNS before the installation. The domain used in this 
 	[jun@okd-master1~]$ ssh-copy-id okd-node2.f5se.io 
 
 [5]	On Master Node, install openshift
-
-	[5.1] Install Ansible
+[5.1] Install Ansible
 
 	sudo yum install -y epel-release
 	sudo yum install -y ansible
 
-	[5.2] Disable epel-release
+[5.2] Disable epel-release
 	
 	sudo vi /etc/yum.repos.d/epel.repo
 	# Change the value enabled=1 to 0 (zero).
 
-	[5.3] Prepare auth
+[5.3] Prepare auth
 	
 	sudo mkdir -p /etc/origin/master/
 	sudo touch /etc/origin/master/htpasswd
 
-	[5.4] Clone openshift-ansible git 
+[5.4] Clone openshift-ansible git 
 	
 	git clone -b release-3.11 https://github.com/openshift/openshift-ansible.git $HOME/openshift-ansible
 	
-	[5.5] Create ansible inventory file
+[5.5] Create ansible inventory file
 	
 
 
