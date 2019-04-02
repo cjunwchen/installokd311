@@ -111,7 +111,6 @@ The installation only deploy one router in master, to depoly router in other nod
 
 
 	$ oc adm router router-node1 --replicas=1 --selector='kubernetes.io/hostname=okd-node1.f5se.io' --service-account=router
-		
 	$ oc adm router router-node2 --replicas=1 --selector='kubernetes.io/hostname=okd-node2.f5se.io' --service-account=router
 
 
