@@ -57,7 +57,8 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 	  User jun
 	  
 	[jun@okd-master1 ~]$chmod 600 ~/.ssh/config
-	# transfer public-key to other nodes
+	
+	# transfer public-key to other nodes, take note FQDN is used
 	[jun@okd-master1~]$ ssh-copy-id okd-master1.f5se.io 
 	[jun@okd-master1.f5se.io password: 
 
