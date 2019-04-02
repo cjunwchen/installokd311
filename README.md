@@ -13,7 +13,7 @@ It is important to prepare DNS before the installation. The domain used in this 
 
 ![](https://github.com/cjunwchen/installokd311/blob/master/images/dnsad.png)
 
-Take note, a wildcard DNS record would need for external to access apps, the DNS record should be point to IP address of node. In this installation, \*.apps.f5se.io CNAME to app.apps.f5se.io, and it points to all three node IP.  
+Take note, a wildcard DNS record would need for external to access apps, the DNS record should be point to IP address of node. In this installation, \*.apps.f5se.io is CNAME to app.apps.f5se.io, and app.apps.f5se.io it points to all three node IP.  
 
 # 3. Prepare Centos on master and all other nodes
 
