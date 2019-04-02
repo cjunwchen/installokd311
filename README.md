@@ -8,3 +8,11 @@ There are some System requirements to configure cluster.
 * Master node has up to 16G memory and up to 4 vCPU.
 * Compute node has up to 8G memory and up to 1 vCPU.
 * On all nodes, base OS is RHEL(CentOS) 7.4 or later (this example is based on CentOS 7.5).
+
+[2]	Prepare DNS
+
+It is important to prepare DNS before the installation. The domain used in this example is f5se.io, which is a internal domain. Here is how DNS record according to the network diagram above.
+
+
+
+
