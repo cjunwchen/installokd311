@@ -107,7 +107,7 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 	
 # 6. Deploy router to all node
 
-The installation only deploy one router in master. To allow external requests be handled by every node in OpenShift cluster, the router need to be deployed in all node. Use the command below to deploy router on okd-node1.f5se.io and okd-node2.f5se.io:
+The installation only deploy one router in master. To allow external requests be handled by every node in OpenShift cluster, the router need to be deployed in all node. Use the command below to deploy router on okd-node1 and okd-node2.
 
 	$ oc adm router router-node1 --replicas=1 --selector='kubernetes.io/hostname=okd-node1.f5se.io' --service-account=router
 	$ oc adm router router-node2 --replicas=1 --selector='kubernetes.io/hostname=okd-node2.f5se.io' --service-account=router
