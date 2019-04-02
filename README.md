@@ -13,7 +13,7 @@ There are some System requirements to configure cluster.
 
 It is important to prepare DNS before the installation. The domain used in this example is f5se.io, which is a internal domain. Here is how DNS record according to the network diagram above, the external DNS used in this installation is Microsoft AD server. 
 
-![](https://github.com/cjunwchen/installokd311/blob/master/images/dns.png)
+![](https://github.com/cjunwchen/installokd311/blob/master/images/dnsad.png)
 
 
 
