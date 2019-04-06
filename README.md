@@ -105,14 +105,59 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 
 	oc adm policy add-cluster-role-to-user cluster-admin jun
 	
-# 6. Deploy router to all node
+# 6. Deploy nginx as router to all node
 
-The installation only deploy one router in master. To allow external requests be handled by every node in OpenShift cluster, the router need to be deployed in all node. Use the command below to deploy router on okd-node1 and okd-node2.
+6.1 Build latest nginx router image
 
-	$ oc adm router router-node1 --replicas=1 --selector='kubernetes.io/hostname=okd-node1.f5se.io' --service-account=router
-	$ oc adm router router-node2 --replicas=1 --selector='kubernetes.io/hostname=okd-node2.f5se.io' --service-account=router
+	$ git clone https://github.com/nginxinc/nginx-openshift-router
+	$ cd nginx-openshift-router/src/nginx
+	
+	If you would like to change some default config in nginx, modify the file nginx-config.template file, which located in directoory
+	nginx-openshift-router/src/nginx/conf.
+	
+	$ docker build -t nginx-openshift-router:latest .
+ 
+6.2 Push nginx image to local registry
+
+	$ oc get svc -n default | grep registry
+	
+	docker-registry    ClusterIP   172.30.82.196   <none>        5000/TCP                  14d
+	registry-console   ClusterIP   172.30.219.2    <none>        9000/TCP                  14d
+	
+	In the exmple above, the first one is local docker registry, the internal FQDN for it would be docker-registry.default.svc
+	
+	$ docker login -p $(oc whoami -t) -e unused -u unused docker-registry.default.svc:5000
+	$ docker tag nginx-openshift-router:latest docker-registry.default.svc:5000/openshift/nginx-openshift-router:latest
+	$ docker push docker-registry.default.svc:5000/openshift/nginx-openshift-router:latest
+
+6.3 Delete the default router in OpenShift
+
+	$ oc project default
+	$ oc get -o yaml service/router dc/router clusterrolebinding.authorization/router-router-role serviceaccount/router > default-router-node2-backup.yaml
+	$ oc delete -f default-router-backup.yaml
+
+6.4 Deploy nginx router
+
+	$ oc adm router router-master1 --images=docker-registry.default.svc:5000/openshift/nginx-openshift-router:0.2 --type='' --selector='kubernetes.io/hostname=okd-master1.f5se.io'
+	$ oc adm router router-node1 --images=docker-registry.default.svc:5000/openshift/nginx-openshift-router:0.2 --type='' --selector='kubernetes.io/hostname=okd-node1.f5se.io'
+	$ oc adm router router-node2 --images=docker-registry.default.svc:5000/openshift/nginx-openshift-router:0.2 --type='' --selector='kubernetes.io/hostname=okd-node2.f5se.io'
+	
+6.5 Verify router deployment
+
+	$ oc get pod -o wide
+	
+	NAME                       READY     STATUS    RESTARTS   AGE       IP            NODE                  NOMINATED NODE
+	docker-registry-1-7qgzv    1/1       Running   1          14d       10.128.0.56   okd-master1.f5se.io   <none>
+	registry-console-1-cgxrr   1/1       Running   1          14d       10.128.0.66   okd-master1.f5se.io   <none>
+	router-master1-1-2pdjc     1/1       Running   0          1h        10.69.30.1    okd-master1.f5se.io   <none>
+	router-node1-1-zn99d       1/1       Running   0          1h        10.69.30.10   okd-node1.f5se.io     <none>
+	router-node2-1-kdxh2       1/1       Running   0          1h        10.69.30.20   okd-node2.f5se.io     <none>
 
 
+	
+	
+	
+ 
 
 
 
