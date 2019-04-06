@@ -109,11 +109,12 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 
 6.1 Build latest nginx router image
 
+	$ cd $HOME
 	$ git clone https://github.com/nginxinc/nginx-openshift-router
 	$ cd nginx-openshift-router/src/nginx
 	
 	If you would like to change some default config in nginx, modify the file nginx-config.template file, which located in directoory
-	nginx-openshift-router/src/nginx/conf.
+	/$HOME/nginx-openshift-router/src/nginx/conf.
 	
 	$ docker build -t nginx-openshift-router:latest .
  
@@ -124,9 +125,11 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 	docker-registry    ClusterIP   172.30.82.196   <none>        5000/TCP                  14d
 	registry-console   ClusterIP   172.30.219.2    <none>        9000/TCP                  14d
 	
-	In the exmple above, the first one is local docker registry, the internal FQDN for it would be docker-registry.default.svc
+	In the exmple above, the first one is local docker registry, the internal FQDN for it would be "docker-registry.default.svc"
 	
-	$ docker login -p $(oc whoami -t) -e unused -u unused docker-registry.default.svc:5000
+	$ docker login -p $(oc whoami -t) -u unused docker-registry.default.svc:5000
+	Login Succeeded
+	
 	$ docker tag nginx-openshift-router:latest docker-registry.default.svc:5000/openshift/nginx-openshift-router:latest
 	$ docker push docker-registry.default.svc:5000/openshift/nginx-openshift-router:latest
 
