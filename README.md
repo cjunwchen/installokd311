@@ -105,7 +105,7 @@ Take note, a wildcard DNS record would need for external to access apps, the DNS
 
 	oc adm policy add-cluster-role-to-user cluster-admin jun
 	
-# 6. Deploy nginx as router to all node
+# 6. Deploy Nginx OpenShift router to all node
 
 6.1 Build latest nginx router image
 
