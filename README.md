@@ -2,7 +2,7 @@
 
   ![](https://github.com/cjunwchen/installokd311/blob/master/images/network_diagram.png)
   
-  System for the installation here
+  System for the installation
   * Master node: 16G memory/4 vCPU.
   * Compute node: 8G memory/2 vCPU.
   * On all nodes, base OS is RHEL(CentOS 7.5).
